@@ -1,6 +1,16 @@
 pipeline {
     agent any
     stages {
+        stage('Clean Remote Folder') {
+            steps {
+                sshagent (credentials: ['EC2_SSH_private_Key']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no ubuntu@$EC2_IP "sudo rm -rf /home/ubuntu/spring-petclinic"
+                    '''
+                }
+            }
+        }
+
         stage('Copy to EC2') {
             steps {
                 sshagent (credentials: ['EC2_SSH_private_Key']) {
@@ -11,7 +21,7 @@ pipeline {
                 }
             }
         }
-
+        
         stage('SSH into EC2') {
             steps {
                 sshagent (credentials: ['EC2_SSH_private_Key']) {
