@@ -5,7 +5,7 @@ pipeline {
             steps {
                 sshagent (credentials: ['EC2_SSH_private_Key']) {
                     sh '''
-                        ssh -o StrictHostKeyChecking=no ubuntu@$EC2_IP "sudo rm -rf /home/ubuntu/spring-petclinic"
+                        ssh -o StrictHostKeyChecking=no ubuntu@$EC2_IP "sudo rm -rf /home/ubuntu/spring-petclinic && sudo rm -rf /app/spring-petclinic"
                     '''
                 }
             }
