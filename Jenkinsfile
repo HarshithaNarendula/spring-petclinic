@@ -8,7 +8,7 @@ pipeline {
             steps {
                 sshagent (credentials: ['EC2_SSH_private_Key']) {
                     sh '''
-                        ssh -o StrictHostKeyChecking=no ubuntu@$ec2_pub_key "cd / && ls -al"
+                        ssh -o StrictHostKeyChecking=no ubuntu@$EC2_IP "cd / && ls -al"
                     '''
                 }
             }
