@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    // environment {
-    //     EC2_IP = credentials('ec2_pub_key')
-    // }
     stages {
         stage('SSH into EC2') {
             steps {
