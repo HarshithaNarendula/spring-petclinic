@@ -5,7 +5,7 @@ pipeline {
             steps {
                 sshagent (credentials: ['EC2_SSH_private_Key']) {
                     sh '''
-                        ssh -o StrictHostKeyChecking=no ubuntu@$EC2_IP "cd spring-petclinic && ./mvnw package && java -jar target/*.jar"
+                        ssh -o StrictHostKeyChecking=no ubuntu@$EC2_IP "pwd && ls -al && cd spring-petclinic && ./mvnw package && java -jar target/*.jar"
                     '''
                 }
             }
