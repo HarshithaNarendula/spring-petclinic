@@ -1,7 +1,10 @@
 pipeline {
     agent any
+    environment {
+        EC2_IP = credentials('ec2_pub_key')
+    }
     stages {
-        stage('Deploy') {
+        stage('SSH into EC2') {
             steps {
                 sshagent (credentials: ['EC2_SSH_private_Key']) {
                     sh '''
