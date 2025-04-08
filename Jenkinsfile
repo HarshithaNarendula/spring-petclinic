@@ -6,7 +6,7 @@ pipeline {
                 sshagent (credentials: ['EC2_SSH_private_Key']) {
                     sh '''
                         echo "Copying project to EC2..."
-                        scp -o StrictHostKeyChecking=no -r . ubuntu@$EC2_IP:/app
+                        scp -o StrictHostKeyChecking=no -r . ubuntu@$EC2_IP:/home/ubuntu/spring-petclinic
                     '''
                 }
             }
@@ -16,7 +16,7 @@ pipeline {
             steps {
                 sshagent (credentials: ['EC2_SSH_private_Key']) {
                     sh '''
-                        ssh -o StrictHostKeyChecking=no ubuntu@$EC2_IP "cd /apps/spring-petclinic && ./mvnw package && java -jar target/*.jar"
+                        ssh -o StrictHostKeyChecking=no ubuntu@$EC2_IP "sudo mv /home/ubuntu/spring-petclinic /app && cd /apps/spring-petclinic && ./mvnw package && java -jar target/*.jar"
                     '''
                 }
             }
