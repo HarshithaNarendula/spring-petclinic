@@ -1,4 +1,4 @@
-pipeline {
+2pipeline {
     agent any
 
     environment {
@@ -12,7 +12,7 @@ pipeline {
                 sshagent (credentials: ['EC2_SSH_private_Key']) {
                     sh '''
                         echo "Cleaning remote folder..."
-                        ssh -o StrictHostKeyChecking=no ubuntu@$3.131.97.184"
+                        ssh -o StrictHostKeyChecking=no ubuntu@$EC2_IP"
                             sudo docker stop petclinic || true &&
                             sudo docker rm petclinic || true &&
                             sudo rm -rf /home/ubuntu/spring-petclinic &&
